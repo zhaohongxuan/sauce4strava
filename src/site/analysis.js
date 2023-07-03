@@ -1658,6 +1658,13 @@ sauce.ns('analysis', ns => {
         if (realStartTime) {
             date = new Date(realStartTime);
         } else {
+            // let activityTime = document.querySelector('time').textContent.trim();
+            // const datePattern = /(\d{4})年(\d{1,2})月(\d{1,2})日/;
+            // const [, year, month, day] = activityTime.match(datePattern);
+            // const timePattern = /([上下]午)?(\d{1,2}):(\d{1,2})/;
+            // const [,, hours, minutes] = activityTime.match(timePattern);
+            // date = new Date(year, month-1, day, hours, minutes, 0);
+            // console.log("activity time:",activityTime,date);
             date = await getEstimatedActivityStart();
         }
         // Name and description are not available in the activity model for other users..

@@ -234,20 +234,29 @@ export class TCXSerializer extends DOMSerializer {
     }
 }
 
-
 export class FITSerializer extends Serializer {
     start() {
         this.fileExt = 'fit';
         this.fitParser = new fit.FitParser();
+        const startTime = this.activity.date.getTime();
+        console.log("activity_time:",startTime)
         this.fitParser.addMessage('file_id', {
             type: 'activity',
-            manufacturer: 0,
-            product: 0,
-            time_created: new Date(),
-            serial_number: 0,
-            number: null,
-            product_name: sauce.name,
+            manufacturer: 1,
+            product: 3145,
+            time_created: startTime,
+            product_name: 'Strava',
         });
+
+        this.fitParser.addMessage('device_info',{
+            manufacturer: 1,
+            product: 3145,
+            serial_number: 1234567890,
+            software_version:3.58,
+            source_type: 5,
+            device_index: 0
+        })
+
         const [vmajor, vminor] = sauce.version.split('.');
         this.fitParser.addMessage('file_creator', {
             software_version: Number([vmajor.slice(0, 2),
